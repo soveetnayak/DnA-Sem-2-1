@@ -2,8 +2,9 @@
 
 `This repo is for collaborating on all the group assignments and projects.`
 
-```Team Members:
-* Khushi Agarwal
-* Naimeesh Tiwari
-* Soveet Nayak
+Team Members:
+```
+->Khushi Agarwal
+->Naimeesh Tiwari
+->Soveet Nayak
 ```
