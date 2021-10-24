@@ -67,21 +67,42 @@ while(1):
             while(1):
                 tmp = sp.call('clear', shell=True)
                 
-                print("a. Insert Book")
-                print("b. Delete Book") 
-                print("c. Insert Magazine")
-                print("d. Delete Magazine")
-                print("e. New Member")  
-                print("f. Remove Member")
-                print("g. New Staff member")
-                print("h. Remove Staff member")  
-                print("z. Logout")
-                ch = input("Enter choice > ")
+                print("1. Add Book to Library")
+                print("2. Add Magazine to Library")
+                print("3. Add new Member")
+                print("4. Add new Staff")
+                # print("5. Add Genre")
+                # print("6. Add Author")
+                # print("7. Add Publisher")
+                # print("8. Add Book Issue details")
+                # print("9. Add Storage details")
+
+                print("31. Remove Book") 
+                print("32. Remove Magazine")
+                print("33. Remove Member")
+                print("34. Remove Staff")
+                # print("35. Remove Genre")
+                # print("36. Remove Author")
+                # print("37. Remove Publisher")
+
+                print("61. Update Book details")
+                print("62. Update Magazine details")
+                print("63. Update Member details")
+                print("64. Update Staff details")
+                print("65. Update Storage details")
+
+                print("91. Books stats")
+                print("92. Number of books of a particular genre")
+                print("93. Names of members living in a particular city")
+                print("94. List of issued books")
+
+                print("0. Quit")
+                option = int(input("Enter choice > "))
                 tmp = sp.call('clear', shell=True)
-                if ch == 'z':
+                if option == 0:
                     exit()
                 else:
-                    dispatch(ch,con,cur)
+                    dispatch(option,con,cur)
                     tmp = input("Enter any key to CONTINUE >")
 
     except Exception as e:

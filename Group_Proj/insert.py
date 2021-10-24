@@ -2,6 +2,108 @@ import subprocess as sp
 import pymysql
 import pymysql.cursors
 
+def enterbookdetails(con,cur):
+
+    try:
+        row = {}
+        author={}
+        genre={}
+        print("Enter new Book's details: ")
+
+        row["Book_id"] = int(input("Book_id: "))
+        if (row["Book_id"] <= 0):
+            print("Book_id cannot be <1/NULL")
+
+        row['Book_Name'] = input("Book_Name: ")
+        
+        row["Edition"] = input("Edition: ")
+       
+        row["ISBN_value"] = int(input("ISBN_value: "))
+        if(row["ISBN_value"] >= 9999999999999 and row["ISBN_value"] <= 1000000000000):
+            print("ISBN_value should be 13 digits")
+            return
+        
+        row["Price"] = float(input("Price: "))
+        if (row["Price"] <= 0):
+            print("Price should be > 0")
+            return
+        
+        row["Publisher_id"] = int(input("Publisher_id: "))
+        
+        row["Status"] = (input("Status (Available/Borrowed): "))
+        if (row['Status'] != "Available" and row['Status'] != "Borrowed"):
+            print("Status should be either Available or Borrowed")
+            return
+        
+        auth = int(input("Number of authors: "))
+        for i in range(auth):
+            author[i] = int(input("Author_id: "))
+        gen = int(input("Number of genres: "))
+        for i in range(gen):
+            genre[i] = int(input("Genre_id: "))
+
+
+        query = "INSERT INTO Books VALUES(%d, '%s', '%s', %d, %f, %d, '%s' )" % (row["Book_id"], row["Book_Name"], row["Edition"], row["ISBN_value"], row["Price"], row["Publisher_id"], row["Status"])
+
+        print(query)
+        cur.execute(query)
+        con.commit()
+
+        for i in range(auth):
+            query = "INSERT INTO Multi_Authors VALUES(%d, %d)" % (
+                author[i], row["Book_id"])
+            print(query)
+            cur.execute(query)
+            con.commit()
+
+        for i in range(gen):
+            query = "INSERT INTO Multi_Genres VALUES(%d, %d)" % (
+                 genre[i], row["Book_id"])
+            print(query)
+            cur.execute(query)
+            con.commit()
+            
+        print("Inserted Into Database! ")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database!\n")
+        print("> ", e)
+
+    return
+
+
+def entermagazinedetails(con,cur):
+    
+    try:
+        row = {}
+        author={}
+        genre={}
+        print("Enter new Magazine's details: ")
+
+        row["Book_id"] = int(input("Book_id: "))
+        if (row["Book_id"] <= 0):
+            print("Book_id cannot be <1/NULL")
+
+        row['Magazine_Name'] = input("Magazine_Name: ")
+        row['Volume_no'] = int(input("Volume_no: "))
+        row["Issue_no"] = int(input("Issue_no: "))
+        row["Publisher_id"] = int(input("Publisher_id: "))
+
+        query = "INSERT INTO Magazines VALUES(%d, '%s', %d, %d, %d, '%s' )" % (row["Book_id"], row["Magazine_Name"], row["Volume_no"], row["Issue_no"], row["Publisher_id"], row["Status"])
+        print(query)
+        cur.execute(query)
+        con.commit()
+            
+        print("Inserted Into Database! ")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database!\n")
+        print("> ", e)
+
+    return
+    
 def entermemberdetails(con,cur):
     """
     Function to implement option 3
@@ -209,108 +311,6 @@ def enterstaffdetails(con,cur):
         print("Failed to insert into database!\n")
         print("> ", e)
         
-        
-def enterbookdetails(con,cur):
-
-    try:
-        row = {}
-        author={}
-        genre={}
-        print("Enter new Book's details: ")
-
-        row["Book_id"] = int(input("Book_id: "))
-        if (row["Book_id"] <= 0):
-            print("Book_id cannot be <1/NULL")
-
-        row['Book_Name'] = input("Book_Name: ")
-        
-        row["Edition"] = input("Edition: ")
-       
-        row["ISBN_value"] = int(input("ISBN_value: "))
-        if(row["ISBN_value"] >= 9999999999999 and row["ISBN_value"] <= 1000000000000):
-            print("ISBN_value should be 13 digits")
-            return
-        
-        row["Price"] = float(input("Price: "))
-        if (row["Price"] <= 0):
-            print("Price should be > 0")
-            return
-        
-        row["Publisher_id"] = int(input("Publisher_id: "))
-        
-        row["Status"] = (input("Status (Available/Borrowed): "))
-        if (row['Status'] != "Available" and row['Status'] != "Borrowed"):
-            print("Status should be either Available or Borrowed")
-            return
-        
-        auth = int(input("Number of authors: "))
-        for i in range(auth):
-            author[i] = int(input("Author_id: "))
-        gen = int(input("Number of genres: "))
-        for i in range(gen):
-            genre[i] = int(input("Genre_id: "))
-
-
-        query = "INSERT INTO Books VALUES(%d, '%s', '%s', %d, %f, %d, '%s' )" % (row["Book_id"], row["Book_Name"], row["Edition"], row["ISBN_value"], row["Price"], row["Publisher_id"], row["Status"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-
-        for i in range(auth):
-            query = "INSERT INTO Multi_Authors VALUES(%d, %d)" % (
-                author[i], row["Book_id"])
-            print(query)
-            cur.execute(query)
-            con.commit()
-
-        for i in range(gen):
-            query = "INSERT INTO Multi_Genres VALUES(%d, %d)" % (
-                 genre[i], row["Book_id"])
-            print(query)
-            cur.execute(query)
-            con.commit()
-            
-        print("Inserted Into Database! ")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database!\n")
-        print("> ", e)
-
-    return
-
-
-def entermagazinedetails(con,cur):
-    
-    try:
-        row = {}
-        author={}
-        genre={}
-        print("Enter new Magazine's details: ")
-
-        row["Book_id"] = int(input("Book_id: "))
-        if (row["Book_id"] <= 0):
-            print("Book_id cannot be <1/NULL")
-
-        row['Magazine_Name'] = input("Magazine_Name: ")
-        row['Volume_no'] = int(input("Volume_no: "))
-        row["Issue_no"] = int(input("Issue_no: "))
-        row["Publisher_id"] = int(input("Publisher_id: "))
-
-        query = "INSERT INTO Magazines VALUES(%d, '%s', %d, %d, %d, '%s' )" % (row["Book_id"], row["Magazine_Name"], row["Volume_no"], row["Issue_no"], row["Publisher_id"], row["Status"])
-        print(query)
-        cur.execute(query)
-        con.commit()
-            
-        print("Inserted Into Database! ")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database!\n")
-        print("> ", e)
-
-    return
 
 
     

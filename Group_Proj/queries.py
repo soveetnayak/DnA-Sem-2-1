@@ -7,9 +7,13 @@ AVERAGE_PRICE, MAX_PRICE, MIN_PRICE [of a book]
 '''
 
 def query_1(con,cur):
-    cur.execute("SELECT COUNT(*) FROM books")
+    cur.execute("SELECT COUNT(*) FROM Books")
     result = cur.fetchone()
     print("Total number of books: ",result[0])
+
+    cur.execute("SELECT COUNT(*) FROM Books WHERE Status = 'Available")
+    result = cur.fetchone()
+    print("Total number of available books: ",result[0])
 
     cur.execute("SELECT AVG(Price) FROM Books")
     result = cur.fetchone()
