@@ -40,7 +40,7 @@ Books by Genres (ex. Total number of books under biography genre)
 def query_2(con,cur):
 
     genre = input("Enter the genre: ")
-    query = "SELECT COUNT(*) FROM Books WHERE Genre = %s" % genre
+    query = "SELECT COUNT(*) AS Total_Books FROM(SELECT * FROM Books INNER JOIN (SELECT Book_Id AS IDBook FROM Multi_Genres WHERE Genre_Id=(SELECT Genre_Id From Genre WHERE Genre_Name= %s))AS Table1 ON Books.Book_Id=Table1.IdBook)As Table2;" % genre
     cur.execute(query)
     result = cur.fetchone()
     print("Total number of books under %s genre: %s",genre,result[0])
