@@ -1,131 +1,38 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
+import insert 
+import delete 
+#import update
+import queries
 
+#Function that maps helper functions to option entered by user
+def dispatch(ch,con,cur):
 
-def entermemberdetails():
-    """
-    Function to implement option 3
-    """
-    try: 
-        row = {}
-        print("Enter new member's details: ")
-        row["Member_id"] = int(input("Member_id: "))
-        row["Government_id"] = int(input("Government_id: "))
-        row['Member_Name'] = (input("Member_Name: "))
-        row[""] = input("Edition: ")
-        row["ISBN_value"] = int(input("ISBN_value: "))
-        row["Price"] = float(input("Price: "))
-        row["Publisher_id"] = int(input("Publisher_id: "))
-        row["Status"] = (input("Status: "))
-
-
-        
-
-    
-
-
-def enterbookdetails():
-    """
-    In addition to taking input, you are required to handle domain errors as well
-    For example: the SSN should be only 9 characters long
-    Sex should be only M or F
-    If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
-    HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
-    """
-    try:
-        row = {}
-        author={}
-        genre={}
-        print("Enter new Book's details: ")
-        row["Book_id"] = int(input("Book_id: "))
-        
-        if (row["Book_id"] < 0):
-            print("Book_id should be positive")
-            
-
-        row['Book_Name'] = (input("Book_Name: "))
-        row["Edition"] = input("Edition: ")
-        row["ISBN_value"] = int(input("ISBN_value: "))
-        row["Price"] = float(input("Price: "))
-        row["Publisher_id"] = int(input("Publisher_id: "))
-        row["Status"] = (input("Status: "))
-
-        auth = int(input("Number oow["Member_id"] = f authors: "))
-        for i in range(auth):
-            author[i] = int(input("Author_id: "))
-        gen = int(input("Number of genres: "))
-        for i in range(gen):
-            genre[i] = int(input("Genre_id: "))
-
-
-        query = "INSERT INTO Books VALUES(%d, '%s', '%s', %d, %f, %d, '%s' )" % (
-            row["Book_id"], row["Book_Name"], row["Edition"], row["ISBN_value"], row["Price"], row["Publisher_id"], row["Status"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-
-        for i in range(auth):
-            query = "INSERT INTO Multi_Authors VALUES(%d, %d)" % (
-                row["Book_id"], author[i])
-            print(query)
-            cur.execute(query)
-            con.commit()
-
-        for i in range(gen):
-            query = "INSERT INTO Multi_Genres VALUES(%d, %d)" % (
-                row["Book_id"], genre[i])
-            print(query)
-            cur.execute(query)
-            con.commit()
-            
-        print("Inserted Into Database! ")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database!\n")
-        print("> ", e)
-
-    return
-
-def deletebookdetails():
-    
-    try:
-        row = {}
-        print("Enter Book_id to delete: ")
-        row["Book_id"] = int(input("Book_id: "))
-
-        query = "DELETE FROM Books WHERE Book_id = %d" % (row["Book_id"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-
-        print("Deleted from Database! ")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to delete into database!\n")
-        print("> ", e)
-
-    return
-
-def dispatch(ch):
-    """
-    Function that maps helper functions to option entered
-    """
-
-    if(ch == 1):
-        enterbookdetails()
-    elif(ch == 2):
-        deletebookdetails()
-    elif(ch == 3):
-        entermemberdetails()
-    elif(ch == 4):
-        deletememberdetails()
-    elif(ch == 5):
-        updatememberdetails()
+    if(ch == 'a'):
+        insert.enterbookdetails(con,cur)
+    elif(ch == 'b' ):
+        delete.deletebookdetails(con,cur)
+    elif(ch == 'c'):
+        insert.entermagazinedetails(con,cur)
+    elif(ch == 'd'):
+        delete.deletemagazinedetails(con,cur)
+    elif(ch == 'e'):
+        insert.entermemberdetails(con,cur)
+    elif(ch == 'f'):
+        delete.deletememberdetails(con,cur)
+    elif(ch == 'g'):
+        insert.enterstaffdetails(con,cur)
+    elif(ch == 'h'):
+        delete.deletestaffdetails(con,cur)
+    elif(ch == 'm'):
+        queries.query_1(con,cur)
+    elif(ch == 'n'):
+        queries.query_2(con,cur)
+    elif(ch == 'o'):
+        queries.query_3(con,cur)
+    elif(ch == 'p'):
+        queries.query_4(con,cur)
     else:
         print("Error: Invalid Option")
 
@@ -134,7 +41,7 @@ def dispatch(ch):
 while(1):
     tmp = sp.call('clear', shell=True)
     
-    # Can be skipped if you want to hardcode username and password
+# Can be skipped if you want to hardcode username and password
     # username = input("Username: ")
     # password = input("Password: ")
 
@@ -149,7 +56,7 @@ while(1):
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
 
-        if(con.openow["Member_id"] = ):
+        if(con.open):
             print("Connected")
         else:
             print("Failed to connect")
@@ -159,18 +66,22 @@ while(1):
         with con.cursor() as cur:
             while(1):
                 tmp = sp.call('clear', shell=True)
-                # Here taking example of Employee Mini-world
-                print("1. Insert Book details")  # Book Details
-                print("2. Delete Book deatils") 
-                print("3. New Member details")  # Promote Employee
-                print("4. Remove Member")  # Employee Statistics
-                print("5. Logout")
-                ch = int(input("Enter choice > "))
+                
+                print("a. Insert Book")
+                print("b. Delete Book") 
+                print("c. Insert Magazine")
+                print("d. Delete Magazine")
+                print("e. New Member")  
+                print("f. Remove Member")
+                print("g. New Staff member")
+                print("h. Remove Staff member")  
+                print("z. Logout")
+                ch = input("Enter choice > ")
                 tmp = sp.call('clear', shell=True)
-                if ch == 5:
+                if ch == 'z':
                     exit()
                 else:
-                    dispatch(ch)
+                    dispatch(ch,con,cur)
                     tmp = input("Enter any key to CONTINUE >")
 
     except Exception as e:
