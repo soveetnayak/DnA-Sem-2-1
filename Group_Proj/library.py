@@ -27,6 +27,13 @@ def dispatch(ch,con,cur):
         delete.deletestaffdetails(con,cur)
     elif(ch == 'i'):
         update.updatebookdetails(con,cur)
+    elif(ch == 'j'):
+        update.updatememberdetails(con,cur)
+    elif(ch == 'k'):
+        update.updatestoragedetails(con,cur)
+    elif(ch == 'l'):
+        update.updatestaffdetails(con,cur)
+    
     elif(ch == 'm'):
         queries.query_1(con,cur)
     elif(ch == 'n'):
@@ -53,7 +60,7 @@ while(1):
         con = pymysql.connect(host='localhost',
                               port=30306,
                               user="root",
-                              password="Veersha#20",
+                              password="Mybirthdayison6",
                               db="Library",
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)

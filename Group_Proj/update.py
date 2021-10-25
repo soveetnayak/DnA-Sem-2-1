@@ -32,6 +32,8 @@ def updatebookdetails(con,cur):
         # print(data, headers=['Book_id', 'Book_Name', 'Edition', 'ISBN_value', 'Price', 'Author_id', 'Publisher_id', 'Genre_id', 'Status'])
         # print("")
 
+        print("Enter book_id")
+        book_id = int(input())
         # Select the detail to change
         print("What detail would you like to change?")
         print("0. Exit")
@@ -45,14 +47,13 @@ def updatebookdetails(con,cur):
         print("8. Status")
         
         
-        print("Enter book_id")
-        book_id = int(input())
+        
         choice = int(input("Enter your choice: "))
 
 
         if choice == 1:
             book_name = input("Enter the new Book_name: ")
-            query = "Update Books SET Book_name = %s where Book_id = %s" %(book_name,book_id)
+            query = "Update Books SET Book_Name = '%s' where Book_id = %s" %(book_name,book_id)
             print("Book_name updated successfully")
 
         elif choice == 2:
@@ -91,7 +92,7 @@ def updatebookdetails(con,cur):
 
         elif choice == 8:
             status = input("Enter the new Status: ")
-            query = "Update Books SET Status = %s where Book_id = %s" %(status,book_id)
+            query = "Update Books SET Status = '%s' where Book_id = %s" %(status,book_id)
             print("Status updated successfully")
 
 
@@ -216,13 +217,13 @@ def updatememberdetails(con,cur):
 
         
         if choice == 1:
-            first_name = input("Enter the new First_name: ")
-            query = "Update Members SET First_Name = %s where Member_id = %s" %(first_name,Member_id)
+            first_name = input("Enter the new First_Name: ")
+            query = "Update Members SET First_Name = '%s' where Member_id = %s" %(first_name,Member_id)
             print("First_name updated successfully")
 
         elif choice == 2:
-            last_name = input("Enter the new Last_name: ")
-            query = "Update Members SET Last_Name = %s where Member_id = %s" %(last_name,Member_id)
+            last_name = input("Enter the new Last_Name: ")
+            query = "Update Members SET Last_Name = '%s' where Member_id = %s" %(last_name,Member_id)
             print("Last_name updated successfully")
 
         elif choice == 3:
@@ -231,7 +232,7 @@ def updatememberdetails(con,cur):
             City = input("Enter the new City: ")
             Pin_Code = input("Enter the new Pin_Code: ")
 
-            query = "Update Members SET House_no = %s, Locality = %s, City = %s, Pin_Code = %s where Member_id = %s" %(House_no,Locality,City,Pin_Code,Member_id)
+            query = "Update Members SET House_no = %s, Locality = '%s', City = '%s', Pin_Code = %s where Member_id = %s" %(House_no,Locality,City,Pin_Code,Member_id)
  
 
         elif choice == 4:
@@ -300,12 +301,12 @@ def updatestaffdetails(con,cur):
         
         if choice == 1:
             first_name = input("Enter the new First_Name: ")
-            query = "Update Staff SET First_name = %s where Staff_id = %s" %(first_name,Staff_id)
+            query = "Update Staff SET First_name = '%s' where Staff_id = %s" %(first_name,Staff_id)
             print("First_name updated successfully")
 
         elif choice == 2:
             last_name = input("Enter the new Last_Name: ")
-            query = "Update Staff SET Last_name = %s where Staff_id = %s" %(last_name,Staff_id)
+            query = "Update Staff SET Last_name = '%s' where Staff_id = %s" %(last_name,Staff_id)
             print("Last_name updated successfully")
 
         elif choice == 3:
@@ -314,17 +315,17 @@ def updatestaffdetails(con,cur):
             City = input("Enter the new City: ")
             Pin_Code = input("Enter the new Pin_Code: ")
 
-            query = "Update Staff SET House_no = %s, Locality = %s, City = %s, Pin_Code = %s where Staff_id = %s" %(House_no,Locality,City,Pin_Code,Staff_id)
+            query = "Update Staff SET House_no = %s, Locality = '%s', City = '%s', Pin_Code = %s where Staff_id = %s" %(House_no,Locality,City,Pin_Code,Staff_id)
 
 
         elif choice == 4:
             designation = input("Enter the new Designation: ")
-            query = "Update Staff SET Designation = %s where Staff_id = %s" %(designation,Staff_id)
+            query = "Update Staff SET Designation = '%s' where Staff_id = %s" %(designation,Staff_id)
             print("Designation updated successfully")
 
         elif choice == 5:
             duty = input("Enter the new Duty: ")
-            query = "Update Staff SET Duty = %s where Staff_id = %s" %(duty,Staff_id)
+            query = "Update Staff SET Duty = '%s' where Staff_id = %s" %(duty,Staff_id)
             print("Duty updated successfully")
 
         elif choice == 0:
