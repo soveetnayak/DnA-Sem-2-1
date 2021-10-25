@@ -19,7 +19,7 @@ def enterbookdetails(con,cur):
         row["Edition"] = input("Edition: ")
        
         row["ISBN_value"] = int(input("ISBN_value: "))
-        if(row["ISBN_value"] >= 9999999999999 and row["ISBN_value"] <= 1000000000000):
+        if(row["ISBN_value"] >= 9999999999999 or row["ISBN_value"] <= 1000000000000):
             print("ISBN_value should be 13 digits")
             return
         

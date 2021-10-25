@@ -3,7 +3,7 @@ import pymysql
 import pymysql.cursors
 import insert 
 import delete 
-#import update
+import update
 import queries
 
 #Function that maps helper functions to option entered by user
@@ -25,6 +25,8 @@ def dispatch(ch,con,cur):
         insert.enterstaffdetails(con,cur)
     elif(ch == 'h'):
         delete.deletestaffdetails(con,cur)
+    elif(ch == 'i'):
+        update.updatebookdetails(con,cur)
     elif(ch == 'm'):
         queries.query_1(con,cur)
     elif(ch == 'n'):
@@ -51,7 +53,7 @@ while(1):
         con = pymysql.connect(host='localhost',
                               port=30306,
                               user="root",
-                              password="shazam",
+                              password="Veersha#20",
                               db="Library",
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
@@ -97,7 +99,7 @@ while(1):
                 print("94. List of issued books")
 
                 print("0. Quit")
-                option = int(input("Enter choice > "))
+                option = input("Enter choice > ")
                 tmp = sp.call('clear', shell=True)
                 if option == 0:
                     exit()
