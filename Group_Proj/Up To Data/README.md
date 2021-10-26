@@ -1,9 +1,12 @@
 # DNA Project Phase-4
-# LIBRARY
+# Library
+
 # Team - UP TO DATA
 1. Soveet Kumar Nayak (2020101086)
 2. Naimeesh Narayan Tiwari (2020101074)
 3. Khushi Agarwal (2020101092)
+
+Run `python3 library.py` to run the python scripts.
 
 ### All the commands our code can run:
 
