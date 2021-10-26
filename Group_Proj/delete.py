@@ -6,7 +6,7 @@ def deletebookdetails(con,cur):
     
     try:
         row = {}
-        print("Enter Field name and Field value to delete(ex. Book_id = 1): ")
+        print("Enter Field name and Field value on the basis of which you want to delete(ex. Book_id = 1): ")
         row["name"] = input("Field: ")
         row["value"] = input("Value: ")
         
@@ -29,7 +29,7 @@ def deletemagazinedetails(con,cur):
     
     try:
         row = {}
-        print("Enter Field name and Field value to delete(ex. Magazine_Name = VOGUE): ")
+        print("Enter Field name and Field value on the basis of which you want to delete(ex. Magazine_Name = VOGUE): ")
         row["name"] = input("Field: ")
         row["value"] = input("Value: ")
         
@@ -54,7 +54,7 @@ def deletememberdetails(con,cur):
 
     try:
         row = {}
-        print("Enter Field name and Field value to delete: ")
+        print("Enter Field name and Field value on the basis of which you want to delete: ")
         row["name"] = input("Field: ")
         row["value"] = input("Value: ")
         
@@ -75,7 +75,7 @@ def deletestaffdetails(con,cur):
 
     try:
         row = {}
-        print("Enter Field name and Field value to delete: ")
+        print("Enter Field name and Field value on the basis of which you want to delete: ")
         row["name"] = input("Field: ")
         row["value"] = input("Value: ")
         
