@@ -62,7 +62,7 @@ while(1):
         con = pymysql.connect(host='localhost',
                               port=30306,
                               user="root",
-                              password="Mybirthdayison6",
+                              password="shazam",
                               db="Library",
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)

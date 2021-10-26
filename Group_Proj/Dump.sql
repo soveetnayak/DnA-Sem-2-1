@@ -1,19 +1,19 @@
 /*
-Books
-Magazine
-Members
-Staff
+~Books
+~Magazine
+~Members
+~Staff
 Issued
-Storage
+~Storage 
 Details
-Author
-Publishers
-Multi_Authors
+~Author
+~Publishers
+~Multi_Authors
 Multi_lingual
-Genre
-Multi_Genres
-Contact_number_Members
-Contact_number_Staff
+~Genre
+~Multi_Genres
+~Contact_number_Members
+~Contact_number_Staff
 Book_issued
 */
 
@@ -102,9 +102,10 @@ CREATE TABLE Issued(
 
 DROP TABLE IF EXISTS Storage;
 CREATE TABLE Storage (
-  Book_id INT NOT NULL CHECK (Book_id > 0), , 
-  Shelf_Number INT NOT NULL CHECK (Shelf_Number > 0),, 
-  Rack_Number INT NOT NULL);
+  Book_id INT NOT NULL CHECK (Book_id > 0), 
+  Shelf_Number INT NOT NULL CHECK (Shelf_Number > 0), 
+  Rack_Number INT NOT NULL,
+  PRIMARY KEY (Book_id));
 
 DROP TABLE IF EXISTS Details;
 CREATE TABLE Details ( 
@@ -117,9 +118,9 @@ CREATE TABLE Details (
   
 DROP TABLE IF EXISTS Multi_lingual;
 CREATE TABLE Multi_lingual ( 
-    Language  Varchar(255),
-    Author_id INT NOT NULL CHECK (Author_id > 0), 
-    PRIMARY KEY (Language,Author_id))
+    Author_id INT NOT NULL CHECK (Author_id > 0),
+    Language  Varchar(255), 
+    PRIMARY KEY (Author_id,Language))
     ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS Multi_Genres;
@@ -145,17 +146,17 @@ CREATE TABLE Author (
   PRIMARY KEY(Author_id));
 
 DROP TABLE IF EXISTS Contact_number_Staff;
-CREATE TABLE Conatct_number_Staff(
-  Mobile_No INT NOT NULL,
-  Staff_id INT NOT NULL ,
-  PRIMARY KEY(Mobile_No,Staff_id)
+CREATE TABLE Contact_number_Staff(
+  Staff_id INT NOT NULL,
+  Mobile_No BIGINT NOT NULL,
+    PRIMARY KEY(Staff_id, Mobile_No)
 );
 
 DROP TABLE IF EXISTS Contact_number_Members;
-CREATE TABLE Conatct_number_Members(
-  Mobile_No INT NOT NULL,
+CREATE TABLE Contact_number_Members(
   Member_id INT NOT NULL ,
-  PRIMARY KEY(Mobile_No,Member_id)
+  Mobile_No BIGINT NOT NULL,
+  PRIMARY KEY(Member_id, Mobile_No)
 );
 
 DROP TABLE IF EXISTS Publishers;

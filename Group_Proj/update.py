@@ -32,7 +32,7 @@ def updatebookdetails(con,cur):
         # print(data, headers=['Book_id', 'Book_Name', 'Edition', 'ISBN_value', 'Price', 'Author_id', 'Publisher_id', 'Genre_id', 'Status'])
         # print("")
 
-        print("Enter book_id")
+        print("Enter book_id: ")
         book_id = int(input())
         # Select the detail to change
         print("What detail would you like to change?")

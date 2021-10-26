@@ -189,6 +189,11 @@ def entermemberdetails(con,cur):
             print("Pin_Code cannot be negative")
             return
         
+        mobile = {}
+        num = int(input("Number of contact no.: "))
+        for i in range(num):
+            mobile[i] = int(input("Contact_no: "))
+        
         row["Date_of_joining"] = (input("Date_of_joining: "))
         if (row['Date_of_joining'] == ""):
             print("Date_of_jooining cannot be empty")
@@ -207,6 +212,13 @@ def entermemberdetails(con,cur):
         print(query)
         cur.execute(query)
         con.commit()
+
+        for i in range(num):
+            query = "INSERT INTO Contact_number_Members VALUES(%d, %d)" % (
+            mobile[i], row["Member_id"])
+            print(query)
+            cur.execute(query)
+            con.commit()
     
     except Exception as e:
         con.rollback()
@@ -290,6 +302,11 @@ def enterstaffdetails(con,cur):
             print("Pin_Code cannot be negative")
             return
 
+        mobile = {}
+        num = int(input("Number of contact no.: "))
+        for i in range(num):
+            mobile[i] = int(input("Contact_no: "))
+
         row["Designation"] = (input("Designation: "))
         if (row['Designation'] == ""):
             print("Designation cannot be empty")
@@ -312,6 +329,13 @@ def enterstaffdetails(con,cur):
         print(query)
         cur.execute(query)
         con.commit()
+
+        for i in range(num):
+            query = "INSERT INTO Contact_number_Staff VALUES(%d, %d)" % (
+            mobile[i], row["Staff_id"])
+            print(query)
+            cur.execute(query)
+            con.commit()
 
     except Exception as e:
         con.rollback()
