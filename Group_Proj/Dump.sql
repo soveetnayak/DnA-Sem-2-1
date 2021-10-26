@@ -57,20 +57,20 @@ CREATE TABLE Members (
 
 DROP TABLE IF EXISTS Staff;
 CREATE TABLE Staff (
-  Staff_id INT NOT NULL AUTO_INCREMENT CONSTRAINT Member_id CHECK (Member_id > 0), 
-  Government_id INT NOT NULL CONSTRAINT Government_id CHECK (Government_id > 0),
+  Staff_id INT NOT NULL AUTO_INCREMENT , 
+  Government_id INT NOT NULL ,
   First_Name VARCHAR(255) NOT NULL ,  
   Last_Name VARCHAR(255) NOT NULL , 
-  Date_of_birth  DATE CONSTRAINT Date_of_birth CHECK (Date_of_birth > 1900-01-01),
-  Age INT CHECK(Age > 0),
+  Date_of_birth  DATE,
+  Age INT,
   House_no VARCHAR(255), 
   Locality VARCHAR(255) ,
   City VARCHAR(255), 
-  Pin_Code INT NOT NULL CONSTRAINT Pin_Code CHECK (Pin_Code > 0),, 
+  Pin_Code INT NOT NULL, 
   Designation VARCHAR(255),
   Duty VARCHAR(255),
   Type VARCHAR(255),  
-  PRIMARY KEY(Member_id)
+  PRIMARY KEY(Staff_id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
 
 

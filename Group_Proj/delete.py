@@ -16,6 +16,16 @@ def deletebookdetails(con,cur):
         cur.execute(query)
         con.commit()
 
+        query = "DELETE FROM Multi_Authors WHERE Book_id IN (SELECT Book_id FROM Books WHERE %s = %s)" % (row["name"], row["value"])
+        
+        cur.execute(query)
+        con.commit()
+
+        query = "DELETE FROM Multi_Genres WHERE Book_id IN (SELECT Book_id FROM Books WHERE %s = %s)" % (row["name"], row["value"])
+
+        cur.execute(query)
+        con.commit()
+
         print("Deleted from Database! ")
 
     except Exception as e:
@@ -91,9 +101,3 @@ def deletestaffdetails(con,cur):
         con.rollback()
         print("Failed to delete into database!\n")
         print("> ", e)
-
-
-
-
-
-

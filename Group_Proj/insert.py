@@ -84,20 +84,18 @@ def entermagazinedetails(con,cur):
     
     try:
         row = {}
-        author={}
-        genre={}
         print("Enter new Magazine's details: ")
 
-        row["Book_id"] = int(input("Book_id: "))
-        if (row["Book_id"] <= 0):
-            print("Book_id cannot be <1/NULL")
+        row["Magazine_id"] = int(input("Magazine_id: "))
+        if (row["Magazine_id"] <= 0):
+            print("Magazine_id cannot be <1/NULL")
 
         row['Magazine_Name'] = input("Magazine_Name: ")
         row['Volume_no'] = int(input("Volume_no: "))
         row["Issue_no"] = int(input("Issue_no: "))
         row["Publisher_id"] = int(input("Publisher_id: "))
 
-        query = "INSERT INTO Magazines VALUES(%d, '%s', %d, %d, %d, '%s' )" % (row["Book_id"], row["Magazine_Name"], row["Volume_no"], row["Issue_no"], row["Publisher_id"], row["Status"])
+        query = "INSERT INTO Magazine VALUES(%d, '%s', %d, %d, %d)" % (row["Magazine_id"], row["Magazine_Name"], row["Volume_no"], row["Issue_no"], row["Publisher_id"])
         print(query)
         cur.execute(query)
         con.commit()
@@ -148,15 +146,15 @@ def entermemberdetails(con,cur):
         else :
             temp_dob = [int(x) for x in row["Date_of_birth"].split('-')]
             if (len(temp_dob) != 3):
+                print("Date_of_birth is in wrong format1")
+                return
+            elif (temp_dob[0] < 1900 or temp_dob[0] > 2021):
                 print("Date_of_birth is in wrong format")
                 return
-            elif (temp_dob[0] < 1900 or temp_dob[0] >= 2021):
+            elif (temp_dob[1] < 1 or temp_dob[1] > 12):
                 print("Date_of_birth is in wrong format")
                 return
-            elif (temp_dob[1] <= 1 or temp_dob[1] >= 12):
-                print("Date_of_birth is in wrong format")
-                return
-            elif (temp_dob[2] > 0 or temp_dob[2] <= 31):
+            elif (temp_dob[2] <= 0 or temp_dob[2] > 31):
                 print("Date_of_birth is in wrong format")
                 return
             else:
@@ -169,17 +167,14 @@ def entermemberdetails(con,cur):
         #     print("Age cannot be negative")
         #     return
 
-        row["House_no"] = int(input("House_no: "))
-        if (row['House_no'] < 0):
-            print("House_no cannot be negative")
-            return
+        row["House_no"] = input("House_no: ")
 
-        row["Locality"] = (input("Locality: "))
+        row["Locality"] = input("Locality: ")
         if (row['Locality'] == ""):
             print("Locality cannot be empty")
             return
 
-        row["City"] = (input("City: "))
+        row["City"] = input("City: ")
         if (row['City'] == ""):
             print("City cannot be empty")
             return
@@ -200,13 +195,13 @@ def entermemberdetails(con,cur):
             return
 
 
-        row["Membership_expiration"] = (input("Membership_expiration (DD-MM-YYYY): "))
+        row["Membership_expiration"] = (input("Membership_expiration (YYYY-MM-DD): "))
         if (row['Membership_expiration'] == ""):
             print("Membership_expiration cannot be empty")
             return
 
 
-        query = "INSERT INTO Members VALUES (%d, %d, '%s', '%s', '%s', %d, %d, '%s', '%s', '%d', '%s', '%s')" % (row["Member_id"], row["Government_id"], row["First_Name"], row["Last_Name"], row["Date_of_birth"], row["Age"], row["House_no"], row["Locality"], row["City"], row["Pin_Code"], row["Date_of_joining"], row["Membership_expiration"])
+        query = "INSERT INTO Members VALUES (%d, %d, '%s', '%s', '%s', %d, '%s' , '%s', '%s', %d, '%s', '%s')" % (row["Member_id"], row["Government_id"], row["First_Name"], row["Last_Name"], row["Date_of_birth"], row["Age"], row["House_no"], row["Locality"], row["City"], row["Pin_Code"], row["Date_of_joining"], row["Membership_expiration"])
 
 
         print(query)
@@ -215,11 +210,13 @@ def entermemberdetails(con,cur):
 
         for i in range(num):
             query = "INSERT INTO Contact_number_Members VALUES(%d, %d)" % (
-            mobile[i], row["Member_id"])
+            row["Member_id"],mobile[i])
             print(query)
             cur.execute(query)
             con.commit()
-    
+
+        print("Inserted Into Database! ")
+
     except Exception as e:
         con.rollback()
         print("Failed to insert into database!\n")
@@ -263,13 +260,13 @@ def enterstaffdetails(con,cur):
             if (len(temp_dob) != 3):
                 print("Date_of_birth is in wrong format")
                 return
-            elif (temp_dob[0] < 1900 or temp_dob[0] >= 2021):
+            elif (temp_dob[0] < 1900 or temp_dob[0] > 2021):
                 print("Date_of_birth is in wrong format")
                 return
-            elif (temp_dob[1] <= 1 or temp_dob[1] >= 12):
+            elif (temp_dob[1] < 1 or temp_dob[1] > 12):
                 print("Date_of_birth is in wrong format")
                 return
-            elif (temp_dob[2] > 0 or temp_dob[2] <= 31):
+            elif (temp_dob[2] <= 0 or temp_dob[2] > 31):
                 print("Date_of_birth is in wrong format")
                 return
             else:
@@ -282,10 +279,8 @@ def enterstaffdetails(con,cur):
         #     print("Age cannot be negative")
         #     return
 
-        row["House_no"] = int(input("House_no: "))
-        if (row['House_no'] < 0):
-            print("House_no cannot be negative")
-            return
+        row["House_no"] = input("House_no: ")
+
 
         row["Locality"] = (input("Locality: "))
         if (row['Locality'] == ""):
@@ -308,14 +303,8 @@ def enterstaffdetails(con,cur):
             mobile[i] = int(input("Contact_no: "))
 
         row["Designation"] = (input("Designation: "))
-        if (row['Designation'] == ""):
-            print("Designation cannot be empty")
-            return
 
         row["Duty"] = (input("Duty: "))
-        if (row['Duty'] == ""):
-            print("Duty cannot be empty")
-            return
 
         row["Type"] = (input("Type: "))
         if (row['Type'] == ""):
@@ -323,7 +312,7 @@ def enterstaffdetails(con,cur):
             return
 
 
-        query = "INSERT INTO Staff VALUES (%d, %d, '%s', '%s', '%s', %d, %d, '%s', '%s','%d', '%s', '%s', '%s')" % (row["Staff_id"], row["Government_id"], row["First_Name"], row["Last_Name"], row["Date_of_birth"], row["Age"], row["House_no"], row["Locality"], row["City"], row["Pin_Code"], row["Designation"], row["Duty"],row["Type"])
+        query = "INSERT INTO Staff VALUES (%d, %d, '%s', '%s', '%s', %d, '%s' , '%s', '%s',%d, '%s', '%s', '%s')" % (row["Staff_id"], row["Government_id"], row["First_Name"], row["Last_Name"], row["Date_of_birth"], row["Age"], row["House_no"], row["Locality"], row["City"], row["Pin_Code"], row["Designation"], row["Duty"],row["Type"])
 
 
         print(query)
@@ -332,11 +321,13 @@ def enterstaffdetails(con,cur):
 
         for i in range(num):
             query = "INSERT INTO Contact_number_Staff VALUES(%d, %d)" % (
-            mobile[i], row["Staff_id"])
+             row["Staff_id"],mobile[i])
             print(query)
             cur.execute(query)
             con.commit()
 
+        print("Inserted Into Database! ")
+        
     except Exception as e:
         con.rollback()
         print("Failed to insert into database!\n")

@@ -80,13 +80,12 @@ while(1):
                 tmp = sp.call('clear', shell=True)
                 
                 print("a. Add Book to Library")
-                print("c. Add Magazine to Library")
-                print("e. Add new Member")
-                print("g. Add new Staff")
-
                 print("b. Remove Book") 
+                print("c. Add Magazine to Library")
                 print("d. Remove Magazine")
+                print("e. Add new Member")
                 print("f. Remove Member")
+                print("g. Add new Staff")
                 print("h. Remove Staff")
 
                 print("i. Update Book details")
@@ -108,10 +107,10 @@ while(1):
                     exit()
                 else:
                     dispatch(option,con,cur)
-                    tmp = input("Enter any key to CONTINUE >")
+                    tmp = input("Enter ANY key to CONTINUE > ")
 
     except Exception as e:
         tmp = sp.call('clear', shell=True)
         print(e)
-        print("Connection Refused: Either username or password is incorrect or user doesn't have access to database")
+        #print("Connection Refused: Either username or password is incorrect or user doesn't have access to database")
         tmp = input("Enter ANY key to CONTINUE >")
