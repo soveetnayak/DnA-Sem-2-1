@@ -6,7 +6,9 @@
 2. Naimeesh Narayan Tiwari (2020101074)
 3. Khushi Agarwal (2020101092)
 
+
 Run `python3 library.py` to run the python scripts.
+
 
 ### All the commands our code can run:
 
@@ -38,13 +40,19 @@ Run `python3 library.py` to run the python scripts.
 
 * **updatestoragedetails(con,cur)** :- This function is present in the update.py file. This function asks the user the field details they want to change and take the new data and Update the details of the storage table accordingly.
 
-
+Books stats
 * **query_1(con,cur)** :- This function is present in the queries.py file. It is an Aggregate query. It prints the Books stats such as AVERAGE_PRICE, MAX_PRICE, MIN_PRICE [of a book].
 
+Number of books of a particular genre
 * **query_2(con,cur)** :- This function is present in the queries.py file.It is an Analysis query. It prints the total number of books of a particular genre(entered by the user).
 
+Names of members living in a particular city
 * **query_3(con,cur)** :- This function is present in the queries.py file.It is a Projection query. It prints the mames of all the members living in a particular city(given by the user).
 
+List of issued books
 * **query_4(con,cur)** :- This function is present in the queries.py file.It is a Selection query. It lists all the issued books.
 
+Search for Books starting with a particular word
 * **query_5(con,cur)** :- This function is present in the queries.py file.It is a Search query.It Search for Books starting with a particular word and prints the Book_id and Book_Name.
+
+`Note`: The MYSQL tables used by us included `References` and `DELETE ON CASCADE` that deletes any children Foreign Key rows in other tables. For example, on deleting an entry in Book table, it would automatically delete respective entries in Multi_Authors and Multi_Genres where Foreign Key would be defined.
