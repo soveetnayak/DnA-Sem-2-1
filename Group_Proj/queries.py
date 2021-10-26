@@ -33,14 +33,11 @@ def query_1(con,cur):
 '''
 Books by Genres (ex. Total number of books under biography genre)
 '''
-#SELECT COUNT(*) AS Total_Books FROM (SELECT * FROM Books,(SELECT * FROM Multi_Genres WHERE Genre_Id=(SELECT Genre_Id From Genre WHERE Genre_Name="x"))AS Table1 WHERE Books.Book_Id=Table1.Book_Id);
-#SELECT COUNT(*) AS Total_Books FROM (SELECT * FROM Books INNER JOIN (SELECT * FROM Multi_Genres WHERE Genre_Id=(SELECT Genre_Id From Genre WHERE Genre_Name="x"))AS Table1 ON Books.Book_Id=Table1.Book_Id);
-#Replace x by value enteres by the user
 
 def query_2(con,cur):
 
     genre = input("Enter the genre: ")
-    query = "SELECT COUNT(*) AS Total_Books FROM(SELECT * FROM Books INNER JOIN (SELECT Book_Id AS IDBook FROM Multi_Genres WHERE Genre_Id=(SELECT Genre_Id From Genre WHERE Genre_Name= %s))AS Table1 ON Books.Book_Id=Table1.IdBook)As Table2;" % genre
+    query = "SELECT COUNT(*) AS Total_Books FROM(SELECT * FROM Books INNER JOIN (SELECT Book_Id AS IDBook FROM Multi_Genres WHERE Genre_Id=(SELECT Genre_Id From Genre WHERE Genre_Name= %s))AS Table1 ON Books.Book_Id=Table1.IdBook)As Table2;" % (genre)
     cur.execute(query)
     result = cur.fetchone()
     print("Total number of books under %s genre: %s",genre,result[0])
@@ -75,4 +72,16 @@ def query_4(con,cur):
 
     return 
 
+'''
+Searching for Books starting with a particular word
+'''
 
+def query_5(con,cur):
+    word = input("Enter the starting search word: ")
+    cur.execute("SELECT Book_id,Book_Name FROM (SELECT *,LOCATE('%s', Book_Name) AS Search FROM Books) AS Table1 WHERE Search=1;" % (word))
+    result = cur.fetchall()
+    print("List of books starting with %s: " % (word))
+    for row in result:
+        print(row)
+
+    return

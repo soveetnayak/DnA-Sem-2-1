@@ -124,12 +124,6 @@ def updatestoragedetails(con,cur):
 
         query = "Select * from Storage;"
         print("Check1\n")
-        # data = db_con(con, cur, query)
-        # print("Check2\n")
-        # # Display all the article details
-        # print("Articles available:", 'green', attrs=['bold'])
-        # print(data, headers=['Storage_id', 'Shelf_no', 'Rack_no', 'Storage_type'])
-        # print("")
 
         
         print("Enter Book_id")
@@ -182,13 +176,6 @@ def updatememberdetails(con,cur):
 
         query = "Select * from Members;"
         print("Check1\n")
-        # data = db_con(con, cur, query)
-        # print("Check2\n")
-        # # Display all the article details
-        # print("Articles available:", 'green', attrs=['bold'])
-        # print(data, headers=['Member_id', 'Name', 'Mobile_no', 'Address'])
-        # print("")
-
 
          # Member_id
         print("Enter Member_id")

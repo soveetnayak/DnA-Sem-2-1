@@ -1,6 +1,13 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
+from datetime import date
+
+def calculateAge(birthDate):
+    today = date.today()
+    age = today.year - birthDate.year - ((today.month, today.day) < (birthDate.month, birthDate.day))
+ 
+    return age
 
 def enterbookdetails(con,cur):
 
@@ -108,6 +115,7 @@ def entermemberdetails(con,cur):
     """
     Function to implement option 3
     """
+    age = 0
     try: 
         row = {}
         print("Enter new member's details: ")
@@ -151,13 +159,15 @@ def entermemberdetails(con,cur):
             elif (temp_dob[2] > 0 or temp_dob[2] <= 31):
                 print("Date_of_birth is in wrong format")
                 return
+            else:
+                row["Age"] = calculateAge(date(temp_dob[0], temp_dob[1], temp_dob[2]))
             
     # Age is a derived attribute so we shouldn't take it as input rather we should derive it
     
-        row["Age"] = int(input("Age: "))
-        if (row['Age'] <= 0):
-            print("Age cannot be negative")
-            return
+        # row["Age"] = int(input("Age: "))
+        # if (row['Age'] <= 0):
+        #     print("Age cannot be negative")
+        #     return
 
         row["House_no"] = int(input("House_no: "))
         if (row['House_no'] < 0):
@@ -250,18 +260,15 @@ def enterstaffdetails(con,cur):
             elif (temp_dob[2] > 0 or temp_dob[2] <= 31):
                 print("Date_of_birth is in wrong format")
                 return
-    
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database!\n")
-        print("> ", e)        
-
+            else:
+                row["Age"] = calculateAge(date(temp_dob[0], temp_dob[1], temp_dob[2]))
+      
     # Age is a derived attribute so we shouldn't take it as input rather we should derive it
 
-        row["Age"] = int(input("Age: "))
-        if (row['Age'] < 0):
-            print("Age cannot be negative")
-            return
+        # row["Age"] = int(input("Age: "))
+        # if (row['Age'] < 0):
+        #     print("Age cannot be negative")
+        #     return
 
         row["House_no"] = int(input("House_no: "))
         if (row['House_no'] < 0):
