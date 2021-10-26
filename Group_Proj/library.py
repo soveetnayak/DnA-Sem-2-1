@@ -25,6 +25,7 @@ def dispatch(ch,con,cur):
         insert.enterstaffdetails(con,cur)
     elif(ch == 'h'):
         delete.deletestaffdetails(con,cur)
+        
     elif(ch == 'i'):
         update.updatebookdetails(con,cur)
     elif(ch == 'j'):
